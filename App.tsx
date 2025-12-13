@@ -5,7 +5,6 @@ import { BookletView } from './components/BookletView';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { INITIAL_SONGS, APP_TITLE } from './constants';
 import { Song, BookletMetadata } from './types';
-import { Printer } from 'lucide-react';
 
 const App: React.FC = () => {
   const [songs] = useState<Song[]>(INITIAL_SONGS);
@@ -70,25 +69,17 @@ const App: React.FC = () => {
     }
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="h-[100dvh] w-full flex flex-col bg-slate-50 overflow-hidden print:bg-white">
+    <div className="h-full w-full flex flex-col bg-slate-50 overflow-hidden print:bg-white print:h-auto print:overflow-visible">
       
       {showWelcome && (
         <WelcomeScreen onStart={handleStartApp} />
       )}
 
       {/* 
-         Mobile: Header is visible ONLY in List View. 
-         Desktop: Header is always visible.
+         Header: Always visible now (removed conditional transform logic)
       */}
-      <header className={`
-        bg-green-900 border-b-4 border-amber-400 h-20 flex items-center justify-between px-4 md:px-6 shadow-lg print:hidden flex-shrink-0 z-20 transition-transform duration-300 relative
-        ${mobileView === 'editor' ? '-translate-y-full absolute w-full md:translate-y-0 md:relative' : 'translate-y-0 relative'}
-      `}>
+      <header className="bg-green-900 border-b-4 border-amber-400 h-20 flex items-center justify-between px-4 md:px-6 shadow-lg print:hidden flex-shrink-0 z-20 relative">
         {/* Subtle texture overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
 
@@ -101,13 +92,7 @@ const App: React.FC = () => {
              <span className="text-xs text-red-300 font-bold uppercase tracking-[0.2em] mt-1">Christmas Carols</span>
           </div>
         </div>
-        <button 
-          onClick={handlePrint}
-          className="relative z-10 p-2.5 bg-green-800/50 text-amber-100 rounded-full hover:bg-green-800 border border-green-700 active:scale-95 transition-all shadow-sm"
-          aria-label="Print"
-        >
-          <Printer className="w-5 h-5" />
-        </button>
+        {/* Print button removed */}
       </header>
 
       {/* Main Content */}

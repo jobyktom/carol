@@ -11,11 +11,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Manjari:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body {
+      /* Force full viewport size on mobile */
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevent body scroll, let App handle it */
         font-family: 'Inter', sans-serif;
-        overscroll-behavior-y: none; /* Prevents pull-to-refresh on mobile */
+        overscroll-behavior-y: none;
         -webkit-tap-highlight-color: transparent;
       }
+      
+      #root {
+        height: 100%;
+        width: 100%;
+      }
+
       .font-cinzel {
         font-family: 'Cinzel', serif;
       }
@@ -33,13 +45,21 @@
         background: #cbd5e1;
         border-radius: 3px;
       }
+      
+      /* Print overrides: Allow full content flow */
       @media print {
+        html, body {
+          height: auto;
+          overflow: visible;
+          background: white;
+        }
+        #root {
+          height: auto;
+          overflow: visible;
+        }
         @page {
           margin: 0;
           size: A4;
-        }
-        body {
-          background: white;
         }
       }
       

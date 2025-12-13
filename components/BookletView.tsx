@@ -23,19 +23,18 @@ export const BookletView: React.FC<BookletViewProps> = ({ songs, metadata }) => 
 
         {/* Credits Footer */}
         <div className="absolute bottom-16 left-0 w-full text-center">
-             <p className="text-xs text-gray-400 uppercase tracking-widest">Designed & Created by</p>
-             <p className="text-sm font-semibold text-gray-600 mt-1">Jobby Kuttamperror Tom</p>
+             <p className="text-xs text-gray-500 uppercase tracking-widest">Designed & Created by</p>
+             <p className="text-sm font-semibold text-black mt-1">Jobby Kuttamperror Tom</p>
         </div>
       </div>
 
       {/* Table of Contents */}
       <div className="booklet-page h-[297mm] w-[210mm] p-16 page-break-after flex flex-col">
-        <h2 className="text-3xl font-bold mb-10 border-b-2 border-black pb-2 inline-block">Contents</h2>
+        <h2 className="text-3xl font-bold mb-10 border-b-2 border-black pb-2 inline-block text-black">Contents</h2>
         <ul className="space-y-4 flex-1">
           {songs.map((song) => (
-            <li key={song.id} className="flex items-baseline gap-4 text-xl">
-              <span className="font-bold whitespace-nowrap">Song {song.id}</span>
-              <span className="text-gray-400">-</span>
+            <li key={song.id} className="flex items-baseline gap-4 text-xl text-black">
+              <span className="font-bold whitespace-nowrap min-w-[2ch]">{song.id}.</span>
               <span className="malayalam-text font-medium">{song.title}</span>
             </li>
           ))}
@@ -47,7 +46,7 @@ export const BookletView: React.FC<BookletViewProps> = ({ songs, metadata }) => 
         <div key={song.id} className="booklet-page min-h-[297mm] w-[210mm] px-16 py-12 page-break-after relative">
           
           {/* Header */}
-          <div className="flex items-start gap-3 mb-8">
+          <div className="flex items-start gap-3 mb-8 border-b border-black/10 pb-4">
              <span className="mt-1"><Music className="w-5 h-5 fill-black text-black" /></span>
              <h2 className="text-2xl font-bold text-black malayalam-text leading-tight">
                Song {song.id} – {song.title}
@@ -67,10 +66,11 @@ export const BookletView: React.FC<BookletViewProps> = ({ songs, metadata }) => 
               </div>
             )}
 
-            {/* Manglish Lyrics (if available) - Rendered below like in the PDF */}
+            {/* Manglish Lyrics (if available) */}
             {song.lyricsManglish && (
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <div className="whitespace-pre-wrap text-[1.1rem] leading-[1.6] font-sans text-gray-800 text-left">
+              <div className="mt-8 pt-8 border-t border-black/20">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4">Manglish Transliteration</h3>
+                <div className="whitespace-pre-wrap text-[1.1rem] leading-[1.6] font-sans text-black text-left">
                   {song.lyricsManglish}
                 </div>
               </div>

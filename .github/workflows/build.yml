@@ -1,0 +1,36 @@
+name: Build web app
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      # If your build needs an env var, add it here.
+      # If the app expects GEMINI_API_KEY, set it as a GitHub Secret and map it:
+      # env:
+      #   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist

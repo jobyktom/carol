@@ -75,7 +75,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-[100dvh] w-full flex flex-col bg-slate-50 overflow-hidden print:bg-white touch-none">
+    <div className="h-[100dvh] w-full flex flex-col bg-slate-50 overflow-hidden print:bg-white">
       
       {showWelcome && (
         <WelcomeScreen onStart={handleStartApp} />

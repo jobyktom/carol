@@ -16,9 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-
       - name: Install deps
-        run: npm ci
+        run: npm install
+
 
       # If your build needs an env var, add it here.
       # If the app expects GEMINI_API_KEY, set it as a GitHub Secret and map it:

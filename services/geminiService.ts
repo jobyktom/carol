@@ -1,6 +1,9 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Initialize the API with the key from environment variables
+// Note: In Vite, we typically use import.meta.env.VITE_API_KEY, but adhering to the 
+// existing project structure using process.env.API_KEY for the pipeline injection.
+const genAI = new GoogleGenerativeAI(process.env.API_KEY || '');
 
 export const generateLyrics = async (songTitle: string, originalTitle: string): Promise<string> => {
   try {
@@ -16,12 +19,14 @@ export const generateLyrics = async (songTitle: string, originalTitle: string): 
       5. Ensure correct spelling and traditional phrasing.
     `;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-    });
+    // Use the 1.5-flash model which is stable and cost-effective
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-    return response.text?.trim() || "Could not generate lyrics. Please try again.";
+    return text.trim() || "Could not generate lyrics. Please try again.";
   } catch (error) {
     console.error("Error generating lyrics:", error);
     throw new Error("Failed to fetch lyrics from Gemini.");

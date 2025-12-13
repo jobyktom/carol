@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Song } from '../types';
-import { ChevronLeft, Music, Globe, Snowflake } from 'lucide-react';
+import { ChevronLeft, Music, Snowflake } from 'lucide-react';
 
 interface LyricsEditorProps {
   song: Song;
@@ -18,44 +18,32 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
     }
   }, [song.id]);
 
-  const hasManglish = !!song.lyricsManglish;
+  // Determine if we should show the toggle.
+  // We only show it if Manglish lyrics exist AND they are different from the main lyrics.
+  // This prevents the toggle from appearing on purely English songs.
+  const hasManglish = !!song.lyricsManglish && 
+    (song.lyrics.replace(/\s/g, '') !== song.lyricsManglish.replace(/\s/g, ''));
 
   return (
     <div className="flex-1 h-full flex flex-col bg-amber-50/20 overflow-hidden relative">
       
       {/* Festive Background Animations */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        {/* Subtle Falling Snowflakes - darker to be visible on light background */}
+        {/* Subtle Falling Snowflakes */}
         {[...Array(8)].map((_, i) => (
           <div 
             key={`snow-${i}`}
             className="snowflake"
             style={{
               left: `${Math.random() * 100}%`,
-              animationDuration: `${15 + Math.random() * 20}s`, // Slow gentle fall
+              animationDuration: `${15 + Math.random() * 20}s`,
               animationDelay: `-${Math.random() * 15}s`,
               fontSize: `${0.8 + Math.random() * 1}rem`,
-              color: 'rgba(148, 163, 184, 0.2)', // Slate-400 very transparent
+              color: 'rgba(148, 163, 184, 0.2)',
               textShadow: '0 0 1px rgba(148, 163, 184, 0.1)'
             }}
           >
             ❄
-          </div>
-        ))}
-
-        {/* Twinkling Stars */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`star-${i}`}
-            className="absolute text-amber-500/10"
-            style={{
-              top: `${Math.random() * 60}%`,
-              left: `${Math.random() * 100}%`,
-              fontSize: `${12 + Math.random() * 16}px`,
-              animation: `pulse ${3 + Math.random() * 4}s infinite ease-in-out`
-            }}
-          >
-            ✦
           </div>
         ))}
       </div>
@@ -67,22 +55,37 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
       <div className="bg-white/90 backdrop-blur-md border-b border-amber-100 py-3 px-3 flex items-center justify-between shadow-sm z-30 sticky top-0 flex-shrink-0 md:hidden h-16">
         <button 
           onClick={onBack}
-          className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-full transition-colors touch-manipulation flex-shrink-0 active:bg-slate-300"
-          aria-label="Back to Index"
+          className="flex items-center gap-2 text-slate-700 px-2 py-2 rounded-lg transition-colors active:bg-slate-100"
+          aria-label="Back"
         >
-          <ChevronLeft className="w-5 h-5" />
-          <span className="font-cinzel font-bold text-sm">Index</span>
+          <ChevronLeft className="w-6 h-6 text-green-800" />
+          <span className="font-cinzel font-bold text-base text-green-900">Back</span>
         </button>
         
-        {/* Mobile Toggle */}
+        {/* Mobile Toggle (Segmented Control) */}
         {hasManglish && (
-          <button 
-            onClick={() => setShowManglish(!showManglish)}
-            className="flex items-center gap-2 bg-red-50 text-red-800 px-3 py-2 rounded-lg font-bold text-xs uppercase tracking-wide border border-red-100 shadow-sm active:bg-red-100"
-          >
-            <Globe className="w-4 h-4" />
-            {showManglish ? 'Manglish' : 'Malayalam'}
-          </button>
+          <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
+            <button
+              onClick={() => setShowManglish(false)}
+              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                !showManglish 
+                  ? 'bg-white text-green-800 shadow-sm' 
+                  : 'text-slate-500'
+              }`}
+            >
+              Malayalam
+            </button>
+            <button
+              onClick={() => setShowManglish(true)}
+              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+                showManglish 
+                  ? 'bg-white text-green-800 shadow-sm' 
+                  : 'text-slate-500'
+              }`}
+            >
+              Transliteration
+            </button>
+          </div>
         )}
       </div>
 
@@ -102,20 +105,20 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
             </div>
          </div>
 
-         {/* Desktop Toggle */}
+         {/* Desktop Toggle (Segmented Control) */}
          {hasManglish && (
-           <div className="flex bg-slate-100 p-1 rounded-full border border-slate-200">
+           <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
              <button
                onClick={() => setShowManglish(false)}
-               className={`px-4 py-1.5 rounded-full text-sm font-bold transition-all font-cinzel ${!showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
+               className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all font-cinzel ${!showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
              >
                Malayalam
              </button>
              <button
                onClick={() => setShowManglish(true)}
-               className={`px-4 py-1.5 rounded-full text-sm font-bold transition-all font-cinzel ${showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
+               className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all font-cinzel ${showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
              >
-               Manglish
+               Transliteration
              </button>
            </div>
          )}
@@ -148,7 +151,7 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
             <div className={`
               relative z-10 bg-white/95 backdrop-blur-sm shadow-xl shadow-amber-900/5 rounded-2xl border border-white/50 transition-all
               p-5 md:p-12
-              ${showManglish ? 'font-sans text-lg md:text-2xl' : 'malayalam-text text-xl md:text-2xl'}
+              ${showManglish ? 'font-sans text-lg md:text-xl' : 'malayalam-text text-xl md:text-2xl'}
             `}>
                 {/* Decoration Icons on Card (Static) */}
                 <Snowflake className="absolute top-3 right-3 md:top-4 md:right-4 w-5 h-5 md:w-6 md:h-6 text-slate-100 rotate-12" />
@@ -160,7 +163,7 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
                 
                 {showManglish && !hasManglish && (
                   <div className="text-slate-400 italic mt-6 md:mt-8 text-center text-sm md:text-base border-t border-slate-100 pt-4">
-                    [Manglish version not available for this song]
+                    [Transliteration not available for this song]
                   </div>
                 )}
 

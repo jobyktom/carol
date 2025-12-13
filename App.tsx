@@ -77,22 +77,25 @@ const App: React.FC = () => {
       )}
 
       {/* 
-         Header: Always visible now (removed conditional transform logic)
+         Header: Always visible, simplified text
       */}
-      <header className="bg-green-900 border-b-4 border-amber-400 h-20 flex items-center justify-between px-4 md:px-6 shadow-lg print:hidden flex-shrink-0 z-20 relative">
+      <header className="bg-green-900 border-b-4 border-amber-400 h-20 flex items-center px-4 md:px-6 shadow-lg print:hidden flex-shrink-0 z-20 relative">
         {/* Subtle texture overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '12px 12px' }}></div>
 
-        <div className="flex items-center gap-3 relative z-10">
+        <div className="flex items-center gap-3 relative z-10 w-full">
           <div className="w-12 h-12 bg-red-700 rounded-lg flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-lg border-2 border-amber-400/50">
             🎄
           </div>
-          <div className="flex flex-col">
-             <h1 className="font-cinzel font-bold text-amber-50 text-xl leading-none tracking-wide">Friends of Dagenham</h1>
-             <span className="text-xs text-red-300 font-bold uppercase tracking-[0.2em] mt-1">Christmas Carols</span>
+          <div className="flex flex-col overflow-hidden">
+             <h1 className="font-cinzel font-bold text-amber-50 text-lg md:text-xl leading-none tracking-wide truncate">
+               Friends of Dagenham
+             </h1>
+             <span className="text-xs text-red-200 font-bold uppercase tracking-[0.15em] mt-1 truncate">
+               Christmas Carols
+             </span>
           </div>
         </div>
-        {/* Print button removed */}
       </header>
 
       {/* Main Content */}

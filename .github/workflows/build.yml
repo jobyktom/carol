@@ -1,12 +1,12 @@
-name: Build web app
+name: Build and Deploy to Hostinger (FTP)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,20 +16,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Install deps
+
+      - name: Install dependencies
         run: npm install
-
-
-      # If your build needs an env var, add it here.
-      # If the app expects GEMINI_API_KEY, set it as a GitHub Secret and map it:
-      # env:
-      #   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Build
         run: npm run build
 
-      - name: Upload dist artifact
-        uses: actions/upload-artifact@v4
+      # Helps with refresh/route handling on Apache hosting (common on shared hosting)
+      - name: Add SPA .htaccess fallback
+        run: |
+          cat > dist/.htaccess << 'EOF'
+          <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
+            RewriteRule ^index\.html$ - [L]
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . /index.html [L]
+          </IfModule>
+          EOF
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          name: dist
-          path: dist
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          dangerous-clean-slate: true

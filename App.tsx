@@ -3,12 +3,16 @@ import { SongListSidebar } from './components/SongListSidebar';
 import { LyricsEditor } from './components/LyricsEditor';
 import { BookletView } from './components/BookletView';
 import { WelcomeScreen } from './components/WelcomeScreen';
+import { ScheduleView } from './components/ScheduleView';
 import { INITIAL_SONGS, APP_TITLE } from './constants';
 import { Song, BookletMetadata } from './types';
+
+type ContentView = 'song' | 'schedule';
 
 const App: React.FC = () => {
   const [songs] = useState<Song[]>(INITIAL_SONGS);
   const [selectedSongId, setSelectedSongId] = useState<number | null>(null);
+  const [contentView, setContentView] = useState<ContentView>('song');
   const [mobileView, setMobileView] = useState<'list' | 'editor'>('list');
   const [showWelcome, setShowWelcome] = useState<boolean>(true);
   const [metadata] = useState<BookletMetadata>({
@@ -37,10 +41,22 @@ const App: React.FC = () => {
     const handlePopState = (event: PopStateEvent) => {
       if (showWelcome) return;
 
-      // If user presses back button and we were in editor mode, 
-      // the history pop will happen. We simply sync our state to 'list'.
-      setMobileView('list');
-      setSelectedSongId(null);
+      const state = event.state;
+      if (state && state.view === 'editor') {
+        // If history has editor state, restore it
+        setMobileView('editor');
+        if (state.type === 'schedule') {
+          setContentView('schedule');
+          setSelectedSongId(null);
+        } else {
+          setContentView('song');
+          setSelectedSongId(state.songId);
+        }
+      } else {
+        // Fallback to list
+        setMobileView('list');
+        setSelectedSongId(null);
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -53,19 +69,27 @@ const App: React.FC = () => {
 
   const handleSelectSong = (id: number) => {
     setSelectedSongId(id);
+    setContentView('song');
     setMobileView('editor');
-    // Push a new entry to history so the back button works naturally
-    window.history.pushState({ view: 'editor', songId: id }, '');
+    // Push a new entry to history
+    window.history.pushState({ view: 'editor', type: 'song', songId: id }, '');
+  };
+
+  const handleShowSchedule = () => {
+    setSelectedSongId(null);
+    setContentView('schedule');
+    setMobileView('editor');
+    // Push schedule view to history
+    window.history.pushState({ view: 'editor', type: 'schedule' }, '');
   };
 
   const handleBackToMenu = () => {
-    // If we have history state, go back (triggering popstate). 
-    // Otherwise just manually set state (fallback).
     if (window.history.state?.view === 'editor') {
       window.history.back();
     } else {
       setMobileView('list');
       setSelectedSongId(null);
+      setContentView('song');
     }
   };
 
@@ -110,19 +134,26 @@ const App: React.FC = () => {
             songs={songs} 
             selectedSongId={selectedSongId} 
             onSelectSong={handleSelectSong} 
+            onShowSchedule={handleShowSchedule}
+            isScheduleSelected={contentView === 'schedule'}
           />
         </div>
         
         {/* Detail / Lyrics View */}
         <div className={`
-          absolute inset-0 z-20 bg-amber-50/30 md:static md:flex-1 h-full transition-transform duration-300 ease-out will-change-transform border-l border-amber-100 shadow-2xl md:shadow-none
+          absolute inset-0 z-20 md:static md:flex-1 h-full transition-transform duration-300 ease-out will-change-transform border-l border-amber-100 shadow-2xl md:shadow-none
           ${mobileView === 'editor' ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}
         `}>
-          {/* On Desktop, show empty state if nothing selected. On Mobile, the view slides in. */}
-          <LyricsEditor 
-            song={selectedSong} 
-            onBack={handleBackToMenu}
-          />
+          {contentView === 'song' ? (
+            <LyricsEditor 
+              song={selectedSong} 
+              onBack={handleBackToMenu}
+            />
+          ) : (
+            <ScheduleView 
+              onBack={handleBackToMenu}
+            />
+          )}
         </div>
       </div>
 

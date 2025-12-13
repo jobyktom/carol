@@ -1,4 +1,34 @@
-import { Song } from './types';
+import { Song, ScheduleDay } from './types';
+
+export const HOUSE_SCHEDULE: ScheduleDay[] = [
+  {
+    date: "19/12/2025",
+    day: "Friday",
+    startTime: "7 PM",
+    startHouse: "Joby & Sogi",
+    houses: [
+      "Anto & Rosy",
+      "Biju & Shaiby",
+      "Jiss & Elizabeth",
+      "Justin & Nimmi",
+      "Leo & Jamina",
+      "Mathew & Marykutty"
+    ]
+  },
+  {
+    date: "20/12/2025",
+    day: "Saturday",
+    startTime: "6 PM",
+    startHouse: "Manoj & Shiny",
+    houses: [
+      "Shijo & Sherin",
+      "Manoje Devasia & Betsy",
+      "Solan & Smitha",
+      "Anish & Bincy",
+      "Jobin & Jisha"
+    ]
+  }
+];
 
 export const INITIAL_SONGS: Song[] = [
   {

@@ -1,20 +1,57 @@
 import React from 'react';
 import { Song } from '../types';
-import { ChevronRight, Star } from 'lucide-react';
+import { ChevronRight, Star, Calendar } from 'lucide-react';
 
 interface SongListSidebarProps {
   songs: Song[];
   selectedSongId: number | null;
   onSelectSong: (id: number) => void;
+  onShowSchedule?: () => void;
+  isScheduleSelected?: boolean;
 }
 
-export const SongListSidebar: React.FC<SongListSidebarProps> = ({ songs, selectedSongId, onSelectSong }) => {
+export const SongListSidebar: React.FC<SongListSidebarProps> = ({ 
+  songs, 
+  selectedSongId, 
+  onSelectSong, 
+  onShowSchedule,
+  isScheduleSelected 
+}) => {
   return (
     <div className="w-full h-full flex flex-col bg-slate-50 border-r border-gray-200">
+      
+      {/* Schedule Button Section */}
+      <div className="p-4 border-b border-gray-200 bg-white shadow-sm z-10">
+        <button
+          onClick={onShowSchedule}
+          className={`
+            w-full flex items-center gap-3 p-4 rounded-xl transition-all border
+            ${isScheduleSelected 
+              ? 'bg-red-50 border-red-200 text-red-900 shadow-sm' 
+              : 'bg-green-50 border-green-100 text-green-900 hover:bg-green-100/80 hover:border-green-200'}
+          `}
+        >
+          <div className={`
+             w-10 h-10 rounded-full flex items-center justify-center shadow-sm text-white
+             ${isScheduleSelected ? 'bg-red-600' : 'bg-green-600'}
+          `}>
+             <Calendar className="w-5 h-5" />
+          </div>
+          <div className="flex-1 text-left">
+             <span className="block font-cinzel font-bold text-base">House Visit Order</span>
+             <span className={`text-xs font-medium uppercase tracking-wider ${isScheduleSelected ? 'text-red-700/70' : 'text-green-700/70'}`}>
+                19th & 20th Dec
+             </span>
+          </div>
+          {isScheduleSelected && <ChevronRight className="w-5 h-5 text-red-400" />}
+        </button>
+      </div>
+
       <div className="flex-1 overflow-y-auto overscroll-contain pb-safe-area">
+        <div className="px-4 py-3 text-xs font-bold uppercase tracking-widest text-slate-400">Song List</div>
         <ul className="divide-y divide-gray-100/50">
           {songs.map((song) => {
-            const isSelected = selectedSongId === song.id;
+            const isSelected = selectedSongId === song.id && !isScheduleSelected;
             return (
               <li key={song.id}>
                 <button

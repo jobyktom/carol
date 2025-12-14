@@ -417,6 +417,7 @@ Gloriyaa..gloriya..gloriya..gloriyaa in excelziz glavoo…. (Raatri raatri)
 
 Thaaraaakumaarikal than sangeetha maadhuri (2)
 Thaarapadhangalil uyarunna raatri
+Thaarapadhangalil uyarunna raatri
 Thoomanju peyyunna raatri
 Swargeeya raatri……….. (2)
 Gloriyaa..gloriya..gloriya..gloriyaa in excelziz glavoo…. (Raatri raatri)
@@ -573,6 +574,211 @@ Good tidings for Christmas and a Happy New Year
 
 We wish you a Merry Christmas`
   },
+  {
+    id: 13,
+    title: 'Jingle Bells',
+    originalTitle: 'Jingle Bells',
+    lyrics: `Dashing through the snow
+In a one-horse open sleigh
+O'er the fields we go
+Laughing all the way
+Bells on bobtails ring
+Making spirits bright
+What fun it is to ride and sing
+A sleighing song tonight
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+A day or two ago
+I thought I'd take a ride
+And soon, Miss Fanny Bright
+Was seated by my side
+The horse was lean and lank
+Misfortune seemed his lot
+We got into a drifted bank
+And then we got upsot
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh`,
+    lyricsManglish: `Dashing through the snow
+In a one-horse open sleigh
+O'er the fields we go
+Laughing all the way
+Bells on bobtails ring
+Making spirits bright
+What fun it is to ride and sing
+A sleighing song tonight
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+A day or two ago
+I thought I'd take a ride
+And soon, Miss Fanny Bright
+Was seated by my side
+The horse was lean and lank
+Misfortune seemed his lot
+We got into a drifted bank
+And then we got upsot
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh
+
+Jingle bells, jingle bells
+Jingle all the way
+Oh! what fun it is to ride
+In a one-horse open sleigh`
+  },
+  {
+    id: 14,
+    title: 'Mary, Did You Know?',
+    originalTitle: 'Mary, Did You Know?',
+    lyrics: `Mary, did you know that your baby boy
+Would one day walk on water?
+Mary, did you know that your baby boy
+Would save our sons and daughters?
+Did you know that your baby boy
+Has come to make you new?
+This child that you delivered
+Will soon deliver you
+
+Mary, did you know that your baby boy
+Will give sight to a blind man?
+Mary, did you know that your baby boy
+Will calm the storm with his hand?
+Did you know that your baby boy
+Has walked where angels trod?
+And when you kiss your little baby
+You kiss the face of God
+
+The blind will see, the deaf will hear
+The dead will live again
+The lame will leap, the dumb will speak
+The praises of the Lamb
+
+Mary, did you know that your baby boy
+Is Lord of all creation?
+Mary, did you know that your baby boy
+Will one day rule the nations?
+Did you know that your baby boy
+Is heaven's perfect Lamb?
+That the sleeping child you're holding
+Is the great, I Am`,
+    lyricsManglish: `Mary, did you know that your baby boy
+Would one day walk on water?
+Mary, did you know that your baby boy
+Would save our sons and daughters?
+Did you know that your baby boy
+Has come to make you new?
+This child that you delivered
+Will soon deliver you
+
+Mary, did you know that your baby boy
+Will give sight to a blind man?
+Mary, did you know that your baby boy
+Will calm the storm with his hand?
+Did you know that your baby boy
+Has walked where angels trod?
+And when you kiss your little baby
+You kiss the face of God
+
+The blind will see, the deaf will hear
+The dead will live again
+The lame will leap, the dumb will speak
+The praises of the Lamb
+
+Mary, did you know that your baby boy
+Is Lord of all creation?
+Mary, did you know that your baby boy
+Will one day rule the nations?
+Did you know that your baby boy
+Is heaven's perfect Lamb?
+That the sleeping child you're holding
+Is the great, I Am`
+  },
+  {
+    id: 15,
+    title: 'Joy to the World',
+    originalTitle: 'Joy to the World',
+    lyrics: `Joy to the world, the Lord is come
+Let earth receive her King
+Let every heart prepare Him room
+And heaven and nature sing
+And heaven and nature sing
+And heaven, and heaven, and nature sing
+
+Joy to the earth, the Savior reigns
+Let men their songs employ
+While fields and floods, rocks, hills and plains
+Repeat the sounding joy
+Repeat the sounding joy
+Repeat, repeat, the sounding joy
+
+No more let sins and sorrows grow
+Nor thorns infest the ground
+He comes to make His blessings flow
+Far as the curse is found
+Far as the curse is found
+Far as, far as, the curse is found
+
+He rules the world with truth and grace
+And makes the nations prove
+The glories of His righteousness
+And wonders of His love
+And wonders of His love
+And wonders, wonders, of His love`,
+    lyricsManglish: `Joy to the world, the Lord is come
+Let earth receive her King
+Let every heart prepare Him room
+And heaven and nature sing
+And heaven and nature sing
+And heaven, and heaven, and nature sing
+
+Joy to the earth, the Savior reigns
+Let men their songs employ
+While fields and floods, rocks, hills and plains
+Repeat the sounding joy
+Repeat the sounding joy
+Repeat, repeat, the sounding joy
+
+No more let sins and sorrows grow
+Nor thorns infest the ground
+He comes to make His blessings flow
+Far as the curse is found
+Far as the curse is found
+Far as, far as, the curse is found
+
+He rules the world with truth and grace
+And makes the nations prove
+The glories of His righteousness
+And wonders of His love
+And wonders of His love
+And wonders, wonders, of His love`
+  }
 ];
 
 export const APP_TITLE = "Friends of Dagenham Christmas Carol Songs Lyrics";

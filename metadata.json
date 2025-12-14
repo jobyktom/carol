@@ -1,5 +1,5 @@
 {
-  "name": "Carol Booklet Generator",
+  "name": "FOD Carol Booklet",
   "description": "A React application to generate and print a Christmas Carol booklet with Malayalam and English lyrics using Gemini AI.",
   "requestFramePermissions": []
 }

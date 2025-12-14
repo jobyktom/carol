@@ -69,7 +69,7 @@ export const BookletView: React.FC<BookletViewProps> = ({ songs, metadata }) => 
             {/* Manglish Lyrics (if available) */}
             {song.lyricsManglish && (
               <div className="mt-8 pt-8 border-t border-black/20">
-                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4">Manglish Transliteration</h3>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-4">Manglish</h3>
                 <div className="whitespace-pre-wrap text-[1.1rem] leading-[1.6] font-sans text-black text-left">
                   {song.lyricsManglish}
                 </div>

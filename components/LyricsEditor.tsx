@@ -62,28 +62,28 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
           <span className="font-cinzel font-bold text-base text-green-900">Back</span>
         </button>
         
-        {/* Mobile Toggle (Segmented Control) */}
+        {/* Mobile Toggle (Segmented Control) - High Visibility */}
         {hasManglish && (
-          <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
+          <div className="flex bg-white p-1 rounded-xl border border-green-200 shadow-sm relative z-40">
             <button
               onClick={() => setShowManglish(false)}
-              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-sm border border-transparent ${
                 !showManglish 
-                  ? 'bg-white text-green-800 shadow-sm' 
-                  : 'text-slate-500'
+                  ? 'bg-green-700 text-white border-green-800 shadow-md scale-105 z-10' 
+                  : 'text-green-800 hover:bg-green-50'
               }`}
             >
               Malayalam
             </button>
             <button
               onClick={() => setShowManglish(true)}
-              className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-all shadow-sm border border-transparent ${
                 showManglish 
-                  ? 'bg-white text-green-800 shadow-sm' 
-                  : 'text-slate-500'
+                  ? 'bg-amber-500 text-white border-amber-600 shadow-md scale-105 z-10' 
+                  : 'text-amber-800 hover:bg-amber-50'
               }`}
             >
-              Transliteration
+              Manglish
             </button>
           </div>
         )}
@@ -105,21 +105,32 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
             </div>
          </div>
 
-         {/* Desktop Toggle (Segmented Control) */}
+         {/* Desktop Toggle (Segmented Control) - High Visibility */}
          {hasManglish && (
-           <div className="flex bg-slate-100 p-1 rounded-lg border border-slate-200">
-             <button
-               onClick={() => setShowManglish(false)}
-               className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all font-cinzel ${!showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
-             >
-               Malayalam
-             </button>
-             <button
-               onClick={() => setShowManglish(true)}
-               className={`px-4 py-1.5 rounded-md text-sm font-bold transition-all font-cinzel ${showManglish ? 'bg-white text-green-800 shadow-sm ring-1 ring-black/5' : 'text-slate-500 hover:text-slate-700'}`}
-             >
-               Transliteration
-             </button>
+           <div className="flex items-center gap-3">
+             <span className="text-xs font-bold text-green-800 uppercase tracking-widest opacity-60 hidden lg:block">Display:</span>
+             <div className="flex bg-white p-1.5 rounded-xl border border-green-200 shadow-md">
+               <button
+                 onClick={() => setShowManglish(false)}
+                 className={`px-6 py-2 rounded-lg text-sm font-bold transition-all font-cinzel ${
+                   !showManglish 
+                     ? 'bg-green-700 text-white shadow-md transform scale-105 ring-1 ring-green-800' 
+                     : 'text-green-800 hover:bg-green-50'
+                 }`}
+               >
+                 Malayalam
+               </button>
+               <button
+                 onClick={() => setShowManglish(true)}
+                 className={`px-6 py-2 rounded-lg text-sm font-bold transition-all font-cinzel ${
+                   showManglish 
+                     ? 'bg-amber-500 text-white shadow-md transform scale-105 ring-1 ring-amber-600' 
+                     : 'text-amber-800 hover:bg-amber-50'
+                 }`}
+               >
+                 Manglish
+               </button>
+             </div>
            </div>
          )}
       </div>
@@ -163,7 +174,7 @@ export const LyricsEditor: React.FC<LyricsEditorProps> = ({ song, onBack }) => {
                 
                 {showManglish && !hasManglish && (
                   <div className="text-slate-400 italic mt-6 md:mt-8 text-center text-sm md:text-base border-t border-slate-100 pt-4">
-                    [Transliteration not available for this song]
+                    [Manglish lyrics not available for this song]
                   </div>
                 )}
 
